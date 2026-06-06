@@ -9,12 +9,23 @@ export default function Chat() {
   return (
     <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
       {messages.map((message) => (
-        <div key={message.id} className="whitespace-pre-wrap">
-          {message.role === "user" ? "User: " : "AI: "}
+        <div
+          key={message.id}
+          className={`flex flex-row  gap-2 whitespace-pre-wrap  ${message.role === "user" ? "justify-end" : "justify-start"} `}
+        >
+          {/* {message.role === "user" ? "User" : "Qwen3.7-max:"} */}
           {message.parts.map((part, i) => {
             switch (part.type) {
               case "text":
-                return <div key={`${message.id}-${i}`}>{part.text}</div>;
+                return (
+                  <div
+                    key={`${message.id}-${i}`}
+                    className={`text-sm  rounded p-1 
+                      ${message.role === "user" ? "" : " bg-blue-500"}`}
+                  >
+                    {part.text}
+                  </div>
+                );
             }
           })}
         </div>
